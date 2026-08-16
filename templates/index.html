@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1083C5">
+  <title>EduPortal - Student Management</title>
+  
+  
+  <link rel="manifest" href="/static/manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <!-- Browser Tab Icon & iOS Support -->
+<link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="brand">
+      <i class="fa-solid fa-graduation-cap logo-icon"></i>
+      <span>EduPortal</span>
+    </div>
+    <div class="header-actions">
+      <i class="fa-regular fa-bell"></i>
+    </div>
+  </header>
+
+  <!-- Navigation Sidebar Drawer -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="user-profile">
+        <i class="fa-solid fa-user-shield admin-icon"></i>
+        <div>
+          <h4>Admin Dashboard</h4>
+          <p>Student Portal</p>
+        </div>
+      </div>
+      <button class="close-btn" onclick="toggleSidebar()">&times;</button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active"><i class="fa-solid fa-users"></i> Students</a>
+      <a href="#" class="nav-item"><i class="fa-solid fa-calendar-check"></i> Attendance</a>
+      <a href="#" class="nav-item"><i class="fa-solid fa-book"></i> Courses</a>
+      <a href="#" class="nav-item"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+    </nav>
+  </aside>
+
+  <!-- PWA Install Banner -->
+  <div id="installBanner" class="install-banner">
+    <div class="install-info">
+      <i class="fa-solid fa-download"></i>
+      <span>Install EduPortal App for quick access</span>
+    </div>
+    <button class="btn-install" id="installBtn">Install</button>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-container">
+    <div class="search-bar-container">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input type="text" id="searchInput" placeholder="Search by name or roll number..." onkeyup="filterStudents()">
+    </div>
+
+    <div class="action-header">
+      <h2>Enrolled Students</h2>
+      <button class="btn-primary" onclick="openModal()">
+        <i class="fa-solid fa-plus"></i> Add Student
+      </button>
+    </div>
+
+    <!-- UI Loader -->
+    <div id="loader" class="loader-container">
+      <div class="spinner"></div>
+      <p>Loading student profiles...</p>
+    </div>
+
+    <!-- Student Cards Container -->
+    <div id="studentGrid" class="student-grid"></div>
+  </main>
+
+  <!-- Add Student Modal -->
+  <div id="studentModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add New Student</h3>
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+      </div>
+      <form id="studentForm" onsubmit="handleAddStudent(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="studentName" required placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label>Roll Number</label>
+          <input type="text" id="rollNo" required placeholder="103">
+        </div>
+        <div class="form-group">
+          <label>Course</label>
+          <select id="courseSelect">
+            <option value="MCA">MCA</option>
+            <option value="B.Tech">B.Tech</option>
+            <option value="BCA">BCA</option>
+            <option value="M.Tech">M.Tech</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit">Submit Record</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
